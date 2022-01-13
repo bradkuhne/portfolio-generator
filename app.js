@@ -1,16 +1,27 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+const fs = require("fs");
+const generatePage = require('./src/page-template.js');
 
+//Code from Module 1 below
+// const printProfileData = profileDataArr => {
+//   // This...
+//   for (let i = 0; i < profileDataArr.length; i += 1) {
+//     console.log(profileDataArr[i]);
+//   }
 
-const printProfileData = (profileDataArr) => {
-    for (let i=0; i < profileDataArr.length; i++){
-        console.log(profileDataArr[i]);
-    }
+//   console.log('================');
 
+//   // Is the same as this...
+//   profileDataArr.forEach(profileItem => console.log(profileItem));
+// };
 
-console.log("=================");
+// printProfileData(profileDataArgs);
+//End of Module 9.1 Code
+// Start of Lesson 9.2 below
+const profileDataArgs = process.argv.slice(2);
+const [uname, github] = profileDataArgs;
 
-profileDataArr.forEach (profileItem => console.log(profileItem));
-};
+fs.writeFile("./index.html", generatePage(uname, github), err => {
+    if (err) throw new Error(err);
 
-
-printProfileData(profileDataArgs);
+    console.log("Portfolio complete! Check out index.html to see the output!");
+});
